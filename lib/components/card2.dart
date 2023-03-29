@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/author_card.dart';
+import 'package:fooderlich/components/author_card.dart';
 import 'package:fooderlich/fooderlich_theme.dart';
+import 'package:fooderlich/models/explore_recipe.dart';
 
 class Card2 extends StatelessWidget {
-  const Card2({super.key});
+  const Card2({super.key, required ExploreRecipe recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class Card2 extends StatelessWidget {
         ),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/fdjuice.jpg'),
+            image: AssetImage('assets/magazine_pics/card_smoothie.png'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(
@@ -40,7 +41,7 @@ class Card2 extends StatelessWidget {
                     right: 16,
                     child: Text(
                       'Recipe',
-                      style: FooderlichTheme.darkTextTheme.headline1,
+                      style: FooderlichTheme.lightTextTheme.headline1,
                     ),
                   ),
                   Positioned(
@@ -50,7 +51,7 @@ class Card2 extends StatelessWidget {
                       quarterTurns: 9,
                       child: Text(
                         "Smoothies",
-                        style: FooderlichTheme.darkTextTheme.headline1,
+                        style: FooderlichTheme.lightTextTheme.headline1,
                       ),
                     ),
                   ),

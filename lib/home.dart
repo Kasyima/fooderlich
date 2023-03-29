@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/card1.dart';
-import 'package:fooderlich/card2.dart';
-import 'package:fooderlich/card3.dart';
+import 'package:fooderlich/components/card1.dart';
+import 'package:fooderlich/components/card2.dart';
+import 'package:fooderlich/components/card3.dart';
 import 'package:fooderlich/fooderlich_theme.dart';
+import 'package:fooderlich/screens/explore_screen.dart';
+import 'package:fooderlich/screens/recipes_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,9 +17,9 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   // _selectedIndex keeps track of which tab is currently selected.
   static List<Widget> pages = <Widget>[
-    const Card1(),
-    const Card2(),
-    const Card3(),
+    ExploreScreen(),
+    RecipesScreen()
+    //const Card3(),
   ];
 
   // 9
