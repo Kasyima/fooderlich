@@ -14,9 +14,8 @@ class RecipesScreen extends StatelessWidget {
       future: exploreService.getRecipes(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // TODO: Add RecipesGridView Here
-          return const Center(
-            child: Text('Recipes Screen'),
+          return RecipesGridView(
+            recipes: snapshot.data ?? [],
           );
         } else {
           return const Center(
