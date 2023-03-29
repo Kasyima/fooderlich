@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/circle_image.dart';
+import 'package:fooderlich/components/circle_image.dart';
 import 'package:fooderlich/fooderlich_theme.dart';
 
-class AuthorCard extends StatelessWidget {
+class AuthorCard extends StatefulWidget {
   final String authorName;
   final String title;
   final ImageProvider? imageProvider;
@@ -14,6 +14,12 @@ class AuthorCard extends StatelessWidget {
   });
 
   @override
+  State<AuthorCard> createState() => _AuthorCardState();
+}
+
+class _AuthorCardState extends State<AuthorCard> {
+  bool _isFavorited = false;
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -24,7 +30,7 @@ class AuthorCard extends StatelessWidget {
             children: [
               CircleImage(
                 imageRadius: 28,
-                imageProvider: imageProvider,
+                imageProvider: widget.imageProvider,
               ),
               const SizedBox(
                 width: 8,
@@ -33,11 +39,11 @@ class AuthorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    authorName,
+                    widget.authorName,
                     style: FooderlichTheme.darkTextTheme.headline2,
                   ),
                   Text(
-                    title,
+                    widget.title,
                     style: FooderlichTheme.darkTextTheme.headline3,
                   ),
                 ],
@@ -53,10 +59,16 @@ class AuthorCard extends StatelessWidget {
               /*A snackbar is useful to briefly display information to users when an
               action has taken place. For example, when you delete an email, you can 
               provide a user with an action to undo .*/
+
+              setState(() {
+                _isFavorited = !_isFavorited;
+              });
             },
-            icon: const Icon(Icons.favorite_border),
+            icon: Icon(
+              _isFavorited ? Icons.favorite : Icons.favorite_border,
+            ),
             iconSize: 30,
-            color: Colors.grey[400],
+            color: Colors.red[400],
           ),
         ],
       ),
