@@ -3,11 +3,8 @@ export 'card1.dart';
 export 'card2.dart';
 export 'card3.dart';
 export 'circle_image.dart';
-export 'today_recipe_list_view.dart';
-export 'friend_post_tile.dart';
 export 'friend_post_list_view.dart';
+export 'friend_post_tile.dart';
 export 'recipe_thumbnail.dart';
 export 'recipes_grid_view.dart';
-
-//! This means u don't have to call additional 
-//! imports when you use the new component.
+export 'today_recipe_list_view.dart';

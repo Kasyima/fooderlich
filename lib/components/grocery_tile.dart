@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/models/models.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+
+import '../models/grocery_item.dart';
 
 class GroceryTile extends StatelessWidget {
   final GroceryItem item;
@@ -18,51 +19,47 @@ class GroceryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.0,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // TODO 22: Add Row to group (name, date, importance)
-          Container(
-            width: 5.0,
-            color: item.color,
-          ),
-          const SizedBox(
-            width: 8.0,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                item.name,
-                style: GoogleFonts.lato(
-                  decoration: textDecoration,
-                  fontSize: 21.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              Container(
+                width: 5.0,
+                color: item.color,
               ),
-              const SizedBox(
-                height: 4.0,
+              const SizedBox(width: 16.0),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.name,
+                    style: GoogleFonts.lato(
+                      decoration: textDecoration,
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4.0),
+                  buildDate(),
+                  const SizedBox(height: 4.0),
+                  buildImportance(),
+                ],
               ),
-              buildDate(),
-              const SizedBox(
-                height: 4.0,
-              ),
-              BuildImportance(),
             ],
           ),
-          // TODO 23: Add Row to group (quantity, checkbox)
           Row(
             children: [
               Text(
                 item.quantity.toString(),
                 style: GoogleFonts.lato(
                   decoration: textDecoration,
-                  fontSize: 21.0,
+                  fontSize: 21,
                 ),
               ),
-              buildCheckbox(),
+              buildCheckbox()
             ],
           ),
         ],
@@ -70,8 +67,7 @@ class GroceryTile extends StatelessWidget {
     );
   }
 
-  // TODO: Add BuildImportance()
-  Widget BuildImportance() {
+  Widget buildImportance() {
     if (item.importance == Importance.low) {
       return Text(
         'Low',
@@ -81,13 +77,11 @@ class GroceryTile extends StatelessWidget {
       return Text(
         'Medium',
         style: GoogleFonts.lato(
-          fontWeight: FontWeight.w800,
-          decoration: textDecoration,
-        ),
+            fontWeight: FontWeight.w800, decoration: textDecoration),
       );
     } else if (item.importance == Importance.high) {
       return Text(
-        "High",
+        'High',
         style: GoogleFonts.lato(
           color: Colors.red,
           fontWeight: FontWeight.w900,
@@ -99,22 +93,14 @@ class GroceryTile extends StatelessWidget {
     }
   }
 
-  // TODO: Add buildDate()
-  // A helper method to format and convert DateTime into dateString format.
   Widget buildDate() {
     final dateFormatter = DateFormat('MMMM dd h:mm a');
     final dateString = dateFormatter.format(item.date);
     return Text(
       dateString,
-      style: TextStyle(
-        decoration: textDecoration,
-      ),
+      style: TextStyle(decoration: textDecoration),
     );
   }
-
-  // TODO: Add buildCheckbox()
-  // Toggles the checkbox on or off based on item.isComplete.
-  // Triggers the onComplete callback when the user taps the checkbox.
 
   Widget buildCheckbox() {
     return Checkbox(

@@ -1,59 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/fooderlich_theme.dart';
-import 'package:fooderlich/models/explore_recipe.dart';
+
+import '../fooderlich_theme.dart';
+import '../models/models.dart';
 
 class Card1 extends StatelessWidget {
-  const Card1({super.key, required ExploreRecipe recipe});
-  final String category = 'Editor\'s Choice';
-  final String title = 'The Art of Dough';
-  final String description = 'Learn to make the perfect bread.';
-  final String chef = 'Ray Wenderlich';
+  final ExploreRecipe recipe;
+
+  const Card1({
+    super.key,
+    required this.recipe,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      // TODO: Card1 Decorate Container
       child: Container(
-        // TODO: Add a stack of text
-
         padding: const EdgeInsets.all(16),
-        //? Flutter units are specified in logical pixels. which are lk dp on Android.
-        //! 2
         constraints: const BoxConstraints.expand(
           width: 350,
           height: 450,
         ),
-        // 3
-        decoration: const BoxDecoration(
-          //! 4
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/magazine_pics/card_bread.jpg'),
+            image: AssetImage(recipe.backgroundImage),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(10.0),
           ),
         ),
-        // TODO: Add a stack of text
-
         child: Stack(
           children: [
             Text(
-              category,
+              recipe.subtitle,
               style: FooderlichTheme.darkTextTheme.bodyText1,
             ),
             Positioned(
               top: 20,
               child: Text(
-                title,
-                style: FooderlichTheme.darkTextTheme.headline5,
+                recipe.title,
+                style: FooderlichTheme.darkTextTheme.headline2,
               ),
             ),
             Positioned(
               bottom: 30,
               right: 0,
               child: Text(
-                description,
+                recipe.message,
                 style: FooderlichTheme.darkTextTheme.bodyText1,
               ),
             ),
@@ -61,10 +54,10 @@ class Card1 extends StatelessWidget {
               bottom: 10,
               right: 0,
               child: Text(
-                chef,
+                recipe.authorName,
                 style: FooderlichTheme.darkTextTheme.bodyText1,
               ),
-            ),
+            )
           ],
         ),
       ),

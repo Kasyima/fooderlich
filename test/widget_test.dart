@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fooderlich/home.dart';
+import 'package:fooderlich/screens/home.dart';
 
 import 'package:fooderlich/main.dart';
 

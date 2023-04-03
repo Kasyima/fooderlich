@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../components/components.dart';
 import '../models/models.dart';
-import 'components.dart';
 
 class FriendPostListView extends StatelessWidget {
   final List<Post> friendPosts;
+
   const FriendPostListView({
     super.key,
     required this.friendPosts,
@@ -22,51 +23,27 @@ class FriendPostListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Social Chefs ',
+            'Social Chefs 👩‍🍳',
             style: Theme.of(context).textTheme.headline1,
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           ListView.separated(
-            primary:
-                false, //! Lets Flutter know that this isn't the primary scroll view.
+            primary: false,
             physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap:
-                true, //! Creates a fixed-length scrollable list of items.
-            //! This gives it a fixed height. If this were false, you'd get an unbounded height error.
+            shrinkWrap: true,
             scrollDirection: Axis.vertical,
+            itemCount: friendPosts.length,
             itemBuilder: (context, index) {
               final post = friendPosts[index];
-              return FriendPostTile(
-                post: post,
-              );
+              return FriendPostTile(post: post);
             },
             separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 16,
-              );
+              return const SizedBox(height: 16);
             },
-            itemCount: friendPosts.length,
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
         ],
       ),
     );
   }
 }
-
-//! There are several different types of scroll physics 
-
-/*
-• AlwaysScrollableScrollPhysics
-• BouncingScrollPhysics
-• ClampingScrollPhysics
-• FixedExtentScrollPhysics
-• NeverScrollableScrollPhysics
-• PageScrollPhysicsRange
-• MaintainingScrollPhysics
-*/
-

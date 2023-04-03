@@ -4,6 +4,7 @@ import '../models/models.dart';
 
 class RecipeThumbnail extends StatelessWidget {
   final SimpleRecipe recipe;
+
   const RecipeThumbnail({
     super.key,
     required this.recipe,
@@ -18,7 +19,6 @@ class RecipeThumbnail extends StatelessWidget {
         children: [
           Expanded(
             child: ClipRRect(
-              //! Clips the img to mk the borders rounded.
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 recipe.dishImage,
@@ -26,9 +26,7 @@ class RecipeThumbnail extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           Text(
             recipe.title,
             maxLines: 1,

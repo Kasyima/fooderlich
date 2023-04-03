@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/fooderlich_theme.dart';
-import 'package:fooderlich/models/explore_recipe.dart';
+
+import '../fooderlich_theme.dart';
+import '../models/models.dart';
 
 class Card3 extends StatelessWidget {
   final ExploreRecipe recipe;
-  const Card3({super.key, required this.recipe});
+
+  const Card3({
+    super.key,
+    required this.recipe,
+  });
+
+  List<Widget> createTagChips() {
+    final chips = <Widget>[];
+    recipe.tags.take(6).forEach(
+      (element) {
+        final chip = Chip(
+          label: Text(
+            element,
+            style: FooderlichTheme.darkTextTheme.bodyText1,
+          ),
+          backgroundColor: Colors.black.withOpacity(0.7),
+        );
+        chips.add(chip);
+      },
+    );
+
+    return chips;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +37,12 @@ class Card3 extends StatelessWidget {
           width: 350,
           height: 450,
         ),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/fd3.jpg'),
+            image: AssetImage(recipe.backgroundImage),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(10.0),
           ),
         ),
@@ -28,13 +51,13 @@ class Card3 extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.6),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(10.0),
                 ),
               ),
             ),
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -43,16 +66,12 @@ class Card3 extends StatelessWidget {
                     color: Colors.white,
                     size: 40,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 8),
                   Text(
-                    'Recipe Trends',
+                    recipe.title,
                     style: FooderlichTheme.darkTextTheme.headline2,
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
@@ -60,91 +79,8 @@ class Card3 extends StatelessWidget {
               child: Wrap(
                 alignment: WrapAlignment.start,
                 spacing: 12,
-                children: [
-                  Chip(
-                    label: Text(
-                      "Healthy",
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                    onDeleted: () {
-                      const snackbar = SnackBar(
-                        content: Text('delete'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    },
-                  ),
-                  Chip(
-                    label: Text('Vegan',
-                        style: FooderlichTheme.darkTextTheme.bodyText1),
-                    backgroundColor: Colors.black.withOpacity(
-                      0.7,
-                    ),
-                    onDeleted: () {
-                      const snackbar = SnackBar(
-                        content: Text('delete'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    },
-                  ),
-                  Chip(
-                    label: Text(
-                      'Vegetables',
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                  ),
-                  Chip(
-                    label: Text(
-                      'Greens',
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                  ),
-                  Chip(
-                    label: Text(
-                      'Wheat',
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                    onDeleted: () {
-                      const snackbar = SnackBar(
-                        content: Text('delete'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    },
-                  ),
-                  Chip(
-                    label: Text(
-                      'Pescetarian',
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                  ),
-                  Chip(
-                    label: Text(
-                      'Mint-passion',
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                    onDeleted: () {
-                      const snackbar = SnackBar(
-                        content: Text('delete'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    },
-                  ),
-                  Chip(
-                    label: Text(
-                      'Lemongrass',
-                      style: FooderlichTheme.darkTextTheme.bodyText1,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.7),
-                  ),
-
-                  /*A Chip widget is a display element that displays text and image avatars,
-                  ans also performs user actions such as tap and delete. */
-                ],
+                runSpacing: 12,
+                children: createTagChips(),
               ),
             ),
           ],

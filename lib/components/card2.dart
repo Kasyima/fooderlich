@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/components/author_card.dart';
-import 'package:fooderlich/fooderlich_theme.dart';
-import 'package:fooderlich/models/explore_recipe.dart';
+
+import '../fooderlich_theme.dart';
+import '../models/models.dart';
+import 'author_card.dart';
 
 class Card2 extends StatelessWidget {
-  const Card2({super.key, required ExploreRecipe recipe});
+  final ExploreRecipe recipe;
+
+  const Card2({
+    super.key,
+    required this.recipe,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,33 +20,30 @@ class Card2 extends StatelessWidget {
           width: 350,
           height: 450,
         ),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/magazine_pics/card_smoothie.png'),
+            image: AssetImage(recipe.backgroundImage),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              10.0,
-            ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10.0),
           ),
         ),
         child: Column(
           children: [
-            const AuthorCard(
-              authorName: 'Mike Katz',
-              title: 'French Champagne',
-              imageProvider: AssetImage('assets/images/brainscode.jpeg'),
+            AuthorCard(
+              authorName: recipe.authorName,
+              title: recipe.role,
+              imageProvider: AssetImage(recipe.profileImage),
             ),
             Expanded(
-              //! With Expanded, you fill in the remaining available space.
               child: Stack(
                 children: [
                   Positioned(
                     bottom: 16,
                     right: 16,
                     child: Text(
-                      'Recipe',
+                      recipe.title,
                       style: FooderlichTheme.lightTextTheme.headline1,
                     ),
                   ),
@@ -48,9 +51,9 @@ class Card2 extends StatelessWidget {
                     bottom: 70,
                     left: 16,
                     child: RotatedBox(
-                      quarterTurns: 9,
+                      quarterTurns: 3,
                       child: Text(
-                        "Smoothies",
+                        recipe.subtitle,
                         style: FooderlichTheme.lightTextTheme.headline1,
                       ),
                     ),
@@ -58,7 +61,6 @@ class Card2 extends StatelessWidget {
                 ],
               ),
             ),
-            // TODO 4: add Positioned text
           ],
         ),
       ),

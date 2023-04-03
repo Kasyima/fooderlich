@@ -5,6 +5,7 @@ import '../models/models.dart';
 
 class RecipesGridView extends StatelessWidget {
   final List<SimpleRecipe> recipes;
+
   const RecipesGridView({
     super.key,
     required this.recipes,
@@ -25,9 +26,7 @@ class RecipesGridView extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final simpleRecipe = recipes[index];
-          return RecipeThumbnail(
-            recipe: simpleRecipe,
-          );
+          return RecipeThumbnail(recipe: simpleRecipe);
         },
       ),
     );

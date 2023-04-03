@@ -18,6 +18,10 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   intl: ^0.18.0
   uuid: ^3.0.7
+  smooth_page_indicator: ^1.0.1
+  webview_flutter: ^4.0.7
+  shared_preferences: ^2.1.0
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

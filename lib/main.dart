@@ -1,43 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/models/grocery_manager.dart';
-import 'package:fooderlich/models/tab_manager.dart';
 import 'package:provider/provider.dart';
-import 'fooderlich_theme.dart';
-import 'home.dart';
 
-void main() {
-  runApp(const Fooderlich());
+import 'fooderlich_theme.dart';
+import 'models/models.dart';
+import 'screens/screens.dart';
+// TODO: Import app_router
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appStateManager = AppStateManager();
+  await appStateManager.initializeApp();
+  runApp(Fooderlich(appStateManager: appStateManager));
 }
 
 class Fooderlich extends StatefulWidget {
-  const Fooderlich({super.key});
+  final AppStateManager appStateManager;
+
+  const Fooderlich({
+    super.key,
+    required this.appStateManager});
 
   @override
-  State<Fooderlich> createState() => _FooderlichState();
+  FooderlichState createState() => FooderlichState();
 }
 
-class _FooderlichState extends State<Fooderlich> {
+class FooderlichState extends State<Fooderlich> {
+  late final _groceryManager = GroceryManager();
+  late final _profileManager = ProfileManager();
+  // TODO: Initialize AppRouter
+
   @override
   Widget build(BuildContext context) {
-    final theme = FooderlichTheme.dark();
-    //? TODO: Apply Home widget
-    return MaterialApp(
-      theme: theme,
-      title: 'Fooderlich',
-      //! Providing TabManager
-      home: MultiProvider(
-        //! accepts a list of providers for Home's descendant widgets to access.
-        //! Use Multiprovider when you need to provide more than one Provider to a widget tree.
-        providers: [
-          ChangeNotifierProvider(
-            //! Creates an instance of TabManager, which listens to tab index changes and notifies its listeners.
-            create: (context) => TabManager(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => GroceryManager(),
-          ),
-        ],
-        child: const Home(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => _groceryManager,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => _profileManager,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => widget.appStateManager,
+        ),
+      ],
+      child: Consumer<ProfileManager>(
+        builder: (context, profileManager, child) {
+          ThemeData theme;
+          if (profileManager.darkMode) {
+            theme = FooderlichTheme.dark();
+          } else {
+            theme = FooderlichTheme.light();
+          }
+
+          // TODO: Replace with Router
+          return MaterialApp(
+            theme: theme,
+            title: 'Fooderlich',
+            home: const LoginScreen(),
+          );
+        },
       ),
     );
   }
