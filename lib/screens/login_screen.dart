@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/models.dart';
 
 class LoginScreen extends StatelessWidget {
   final String? username;
@@ -57,6 +59,12 @@ class LoginScreen extends StatelessWidget {
         ),
         onPressed: () async {
           // TODO: Initiate Login
+          // This code uses AppStateManager to call a function that updates the user's login status.
+
+          Provider.of<AppStateManager>(context, listen: false).login(
+            'mockUserName',
+            'mockPassword',
+          );
         },
       ),
     );
@@ -68,7 +76,7 @@ class LoginScreen extends StatelessWidget {
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.green,
+            color: Color.fromARGB(255, 216, 15, 72),
             width: 1.0,
           ),
         ),
